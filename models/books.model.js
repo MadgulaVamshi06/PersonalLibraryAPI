@@ -11,13 +11,13 @@ const bookSchema = new mongoose.Schema(
     },
     userId: { type: String, required: true },
     userEmail: { type: String, required: true },
-    userName: { type: String, required: true },
+    userName: { type: String, required: true }
   },
   {
     versionKey: false,
   }
 );
 
-const BookModel = mongoose.model("user", bookSchema);
+const BookModel = mongoose.model("book", bookSchema);
 
 module.exports = BookModel;
