@@ -1,34 +1,33 @@
 const express = require("express");
 const bookRouter = express.Router();
-
+const auth = require("../middleware/auth.middleware");
 const BookModel = require("../models/books.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const auth = require("../middleware/auth.middleware");
 require("dotenv").config();
 
 // book post method
 
 bookRouter.post("/addBook", auth, async (req, res) => {
-  const { title, author, status, userId, userName, userEmail } = req.body;
-  console.log("reqested body", req.body);
-
-  try {
-    const book = new BookModel({
-      title,
-      author,
-      status,
-      userId,
-      userName,
-      userEmail,
-    });
-    await book.save();
-    res.status(200).send("Book created successfully");
-  } catch (error) {
-    console.log("error", error);
-    res.status(500).send("Internal Error");
-  }
-});
+    const { title, author, status, userId, userName, userEmail } = req.body;
+    console.log("reqested body", req.body);
+  
+    try {
+      const book = new BookModel({
+        title,
+        author,
+        status,
+        userId,
+        userName,
+        userEmail,
+      });
+      await book.save();
+      res.status(200).send("Book created successfully");
+    } catch (error) {
+      console.log("error", error);
+      res.status(500).send("Internal Error");
+    }
+  } ) ;
 
 // book get method
 bookRouter.get("/getBooks", auth, async (req, res) => {
