@@ -8,6 +8,9 @@ const app = express();
 app.use(express.json());
 const port =  8000 ;
 
+const userRouter = require("./route/user.route")
+app.use("/users",userRouter)
+
 app.get("/",(req,res)=>{
     res.send("WELCOME TO PERSONAL LIBRARY")
 })
