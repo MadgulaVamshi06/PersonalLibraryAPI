@@ -13,6 +13,7 @@ const auth = (req,res,next)=>{
         req.body.userId = decoded.id;
         req.body.userEmail = decoded.email;
         req.body.userName = decoded.name;
+         req.body.userBook = decoded.book
         if(!decoded){
             return res.status(401).send("Invalid token")
         }
