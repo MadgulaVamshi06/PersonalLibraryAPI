@@ -14,7 +14,7 @@ const favourites =  require("../favourites")
 
 
 favouriteRouter.post("/addBook", auth, async (req, res) => {
-    const {  userId} = req.body;
+    const {  userId} = req.params;
     console.log("reqested body", req.body);
   
     try {
@@ -26,8 +26,10 @@ favouriteRouter.post("/addBook", auth, async (req, res) => {
       if(user.favourites.includes(userId)){
         return res.status(400).send("book already added to favourites")
       }
-      await book.save();
-      res.status(200).send("Book created successfully");
+
+      user.favourites.push(userId)
+      await user.save();
+      res.status(200).send("book added to favourites");
     } catch (error) {
       console.log("error", error);
       res.status(500).send("Internal Error");
