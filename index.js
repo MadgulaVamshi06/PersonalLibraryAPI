@@ -11,6 +11,9 @@ const port =  8000 ;
 const userRouter = require("./routes/user.route")
 app.use("/users",userRouter)
 
+const bookRouter = require("./routes/books.route")
+app.use("/books",bookRouter)
+
 app.get("/",(req,res)=>{
     res.send("WELCOME TO PERSONAL LIBRARY")
 })
