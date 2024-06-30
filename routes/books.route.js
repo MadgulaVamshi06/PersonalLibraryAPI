@@ -57,12 +57,12 @@ bookRouter.patch("/editBook/:bookId", auth, async (req, res) => {
     if(!book){
         return res.status(500).send(" Book not found");
     }
-    if(book.userId !== bookId){
+    if(book.userId !== userId){
         res.status(403).send("You are not authorized");
     }
     await BookModel.updateOne(
       {_id :bookId },
-      {$set : {title , uthor, status}}
+      {$set : {title , author, status}}
     )
     res.status(200).send("Book updated successfully");
   } catch (error) {
@@ -70,5 +70,30 @@ bookRouter.patch("/editBook/:bookId", auth, async (req, res) => {
     res.status(500).send(" Error in updating ");
   }
 });
+
+
+// delete method 
+bookRouter.delete("/deleteBook/:bookId", auth, async (req, res) => {
+    const { bookId } = req.params;
+    const {userId} = req.body;
+    try {
+      const book = await BookModel.findById(bookId);
+  
+      if(!book){
+          return res.status(500).send(" Book not found");
+      }
+      if(book.userId !== userId){
+          res.status(403).send("You are not authorized");
+      }
+      await BookModel.deleteOne(
+        {_id :bookId },
+      )
+      res.status(200).send("Book deleted successfully");
+    } catch (error) {
+      console.log("error", error);
+      res.status(500).send(" Error in deleting ");
+    }
+  });
+
 
 module.exports = bookRouter;
