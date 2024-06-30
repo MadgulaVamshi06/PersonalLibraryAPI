@@ -9,11 +9,9 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const favourites =  require("../favourites")
 
+// favourite post route 
 
-
-
-
-favouriteRouter.post("/addBook", auth, async (req, res) => {
+favouriteRouter.post("/addfavourite", auth, async (req, res) => {
     const {  userId} = req.params;
     console.log("reqested body", req.body);
   
