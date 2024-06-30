@@ -14,6 +14,9 @@ app.use("/users",userRouter)
 const bookRouter = require("./routes/books.route")
 app.use("/books",bookRouter)
 
+const reviewRouter = require("./routes/reviews.route")
+app.use("./reviews",reviewRouter)
+
 app.get("/",(req,res)=>{
     res.send("WELCOME TO PERSONAL LIBRARY")
 })
